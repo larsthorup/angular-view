@@ -1,4 +1,4 @@
-bower_components
+src/lib
 _SpecRunner.html
 output
 node_modules
