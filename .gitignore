@@ -3,3 +3,4 @@ _SpecRunner.html
 output
 node_modules
 .grunt
+.DS_Store
