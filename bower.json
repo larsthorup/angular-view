@@ -1,0 +1,17 @@
+{
+  "name": "angular-view",
+  "version": "0.0.1",
+  "homepage": "https://github.com/larsthorup/angular-view",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.0.8"
+  }
+}
