@@ -24,7 +24,7 @@ describe('view', function () {
         $rootScope = _$rootScope_;
     }));
 
-    it('should connect the button with the div', function () {
+    it('should connect the div', function () {
         $rootScope.isOn = false;
         var formElement = angular.element(indexHtml);
         var element = $compile(formElement)($rootScope);
@@ -32,6 +32,19 @@ describe('view', function () {
 
         var div = formElement.find('div');
         expect(div.css('display')).toBe('none');
+    });
+
+    it('should connect the button with the div', function () {
+        $rootScope.isOn = false;
+        var formElement = angular.element(indexHtml);
+        var element = $compile(formElement)($rootScope);
+        $rootScope.$digest();
+
+        var button = formElement.find('button');
+        button.trigger('click');
+
+        var div = formElement.find('div');
+        expect(div.css('display')).toBe('');
     });
 
 });
