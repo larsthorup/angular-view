@@ -18,6 +18,7 @@ module.exports = function (grunt) {
                 specs: 'test/**/*.test.js',
                 vendor: [
                     'src/lib/angular/angular.js',
+                    'src/lib/angular-mocks/angular-mocks.js',
                     'src/lib/jquery/jquery.js'
                 ],
                 junit: {
