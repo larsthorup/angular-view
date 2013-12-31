@@ -1,50 +1,46 @@
-describe('template', function () {
-	var indexHtml;
+describe('app', function () {
+    var templateHtml;
 
-	beforeEach(function(){
-		indexHtml = $.ajax('src/template.html', {async: false}).responseText;
-	});
-
-    it('works', function () {
-        expect($(indexHtml).find('div').length).toBe(1);
-    })
-});
-
-describe('view', function () {
-    var $compile, $rootScope, template;
-    var indexHtml;
-
-    beforeEach(inject(function($templateCache, _$compile_, _$rootScope_) {
-
-//        template = $templateCache.get('main/webapp/templates/ssnControl.htm');
-//        $templateCache.put('/myApp/templates/ssnControl.htm',template);
-        indexHtml = $.ajax('src/template.html', {async: false}).responseText;
-
-        $compile = _$compile_;
-        $rootScope = _$rootScope_;
+    beforeEach(inject(function($templateCache) {
+        templateHtml = $templateCache.get('src/template.html');
+        if(!templateHtml) {
+            templateHtml = $.ajax('src/template.html', {async: false}).responseText;
+            $templateCache.put('src/template.html', templateHtml)
+        }
     }));
 
-    it('should connect the div', function () {
-        $rootScope.isOn = false;
-        var formElement = angular.element(indexHtml);
-        var element = $compile(formElement)($rootScope);
-        $rootScope.$digest();
-
-        var div = formElement.find('div');
-        expect(div.css('display')).toBe('none');
+    describe('template', function () {
+        it('works', function () {
+            expect($(templateHtml).find('div').length).toBe(1);
+        })
     });
 
-    it('should connect the button with the div', function () {
-        $rootScope.isOn = false;
-        var formElement = angular.element(indexHtml);
-        var element = $compile(formElement)($rootScope);
-        $rootScope.$digest();
+    describe('view', function () {
+        var $compile, $rootScope, formElement;
 
-        var button = formElement.find('button');
-        button.trigger('click');
+        beforeEach(inject(function(_$compile_, _$rootScope_) {
+            $compile = _$compile_;
+            $rootScope = _$rootScope_;
+            $rootScope.isOn = false;
+            formElement = angular.element(templateHtml);
+            var element = $compile(formElement)($rootScope);
+            $rootScope.$digest();
+        }));
 
-        var div = formElement.find('div');
-        expect(div.css('display')).toBe('');
+        it('should connect the div', function () {
+            var div = formElement.find('div');
+            expect(div.css('display')).toBe('none');
+        });
+
+        it('should connect the button with the div', function () {
+            var button = formElement.find('button');
+            button.trigger('click');
+
+            var div = formElement.find('div');
+            expect(div.css('display')).toBe('');
+        });
+
     });
 
 });
+
